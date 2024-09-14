@@ -1,0 +1,21 @@
+.btn {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn.primary,
+.btn.secondary:hover {
+    background: rgb(96, 96, 245);
+    color: white;
+}
+
+.btn.secondary,
+.btn.primary:hover {
+    background: transparent;
+    color: rgb(96, 96, 245);
+}
