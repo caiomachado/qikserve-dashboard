@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState, useMemo } from 'react'
+import { ChangeEvent, useEffect, useState, useMemo, useCallback } from 'react'
 import './App.css'
 import { Search } from 'lucide-react'
 import { menuItems } from './mock/menuItems';
@@ -15,13 +15,13 @@ function App() {
     return items.filter((item) => item.name?.toLowerCase().includes(searchValue.toLowerCase()))
   }, [searchValue, items])
 
-  function handleItemClick(item: MenuItem) {
+  const handleItemClick = useCallback((item: MenuItem) => {
     if (selectedItem?.id === item.id) {
       setSelectedItem(null);
     } else {
       setSelectedItem(item);
     }
-  }
+  }, [selectedItem?.id]);
 
   const debouncedOnChange = debounce((newValue) => {
     setSearchValue(newValue);

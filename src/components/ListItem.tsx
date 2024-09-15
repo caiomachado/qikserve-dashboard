@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { MenuItem } from "../models";
 import { Pencil } from 'lucide-react';
+import { LazyImage } from './LazyImage';
 
 type Props = {
     menuItem: MenuItem;
@@ -8,14 +9,14 @@ type Props = {
     isActive: boolean;
 }
 
-export const ListItem = ({ menuItem, handleClick, isActive }: Props) => {
+const Item = ({ menuItem, handleClick, isActive }: Props) => {
     const [isHovering, setIsHovering] = useState(false);
 
     return (
         <li className={isActive ? 'active' : ''} onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <div className="name-wrapper">
                 {!!menuItem?.images?.length && (
-                    <img src={menuItem?.images?.[0]?.image} alt="Menu item image" />
+                    <LazyImage src={menuItem?.images?.[0]?.image} alt="Menu item image" />
                 )}
 
                 {menuItem.name}
@@ -29,3 +30,5 @@ export const ListItem = ({ menuItem, handleClick, isActive }: Props) => {
         </li>
     )
 }
+
+export const ListItem = memo(Item);
